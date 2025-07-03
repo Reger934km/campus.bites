@@ -1,0 +1,34 @@
+{% load static %}
+{% load cart_extras %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - Campus Bites</title>
+  <link rel="stylesheet" href="{% static 'canteen/com.css' %}">
+
+
+</head>
+<body class="dark-theme">
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">Campus Bite's</a>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'menu' %}">Menu</a></li>
+        <li><a href="{% url 'cart' %}">Cart</a></li>
+        <li><a href="{% url 'about' %}" class="active">About Us</a></li>
+        <li><a href="c{% url 'contact' %}">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="about-section">
+    <h1>About Us</h1>
+    <p>Campus Bites is your go-to canteen website for delicious, affordable, and customizable meals for students and staff. Our mission is to bring convenience and taste together by providing freshly prepared meals that cater to every palate.</p>
+    <p>Whether you’re looking for a quick snack between lectures or a full meal to refuel, Campus Bites ensures quality and hygiene at every step.</p>
+    <p>We believe in sustainability, community, and great food. Come eat with us!</p>
+  </section>
+</body>
+</html>

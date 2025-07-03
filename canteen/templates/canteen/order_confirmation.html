@@ -1,0 +1,32 @@
+{% load static %}
+{% load cart_extras %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Order Confirmation - Campus Bites</title>
+  <link rel="stylesheet" href="{% static 'canteen/cart.css' %}" />
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <img src="{% static 'canteen/images/bb.png' %}" alt="LOGO" />
+    </div>
+  </header>
+
+  <section class="cart-section">
+    <div class="cart-container">
+      <h2>Thank you for your order!</h2>
+      <p>Your order has been placed successfully.</p>
+      <a href="{% url 'menu' %}" class="browse-btn">Back to Menu</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-columns">
+      <!-- Your footer content here -->
+    </div>
+  </footer>
+</body>
+</html>

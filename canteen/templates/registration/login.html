@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | Campus Bites</title>
+  <link rel="stylesheet" href="{% static 'canteen/auth.css' %}">
+</head>
+<body>
+  <div class="auth-container">
+    <h2>Login</h2>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="{% url 'register' %}">Signup</a></p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+/* profile_v2.css */
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212;
+  color: #ffffff;
+}
+
+/* Header Styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e1e1e;
+  padding: 15px 40px;
+}
+
+.logo img {
+  height: 50px;
+}
+.btn{
+  font-size: 20px;
+  background-color: #00bcd4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s
+}
+
+.nav a {
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: #00bcd4;
+}
+
+/* Profile Section */
+.profile-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+  background-color: #1a1a1a;
+}
+
+.profile-card {
+  background-color: #2a2a2a;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  border: 3px solid #00bcd4;
+}
+
+.profile-card h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.profile-card p {
+  margin: 8px 0;
+  color: #cccccc;
+}
+
+/* Logout Button */
+.logout-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 25px;
+  background-color: #00bcd4;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #0097a7;
+}
+
+/* Footer */
+footer {
+  background-color: #1e1e1e;
+  color: #cccccc;
+  padding: 40px 20px;
+  margin-top: 60px;
+}
+
+.footer-columns {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.column {
+  margin: 20px;
+  min-width: 180px;
+}
+
+.column h4 {
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.column a {
+  display: block;
+  color: #cccccc;
+  text-decoration: none;
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.column a:hover {
+  color: #00bcd4;
+}
+
+footer p {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 14px;
+  color: #888888;
+}
+

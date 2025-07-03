@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Logged Out | Campus Bites</title>
+  <link rel="stylesheet" href="{% static 'canteen/auth.css' %}">
+</head>
+<body>
+  <div class="auth-container">
+    <h2>You have been logged out</h2>
+    <a href="{% url 'login' %}" class="btn">Login Again</a>
+  </div>
+</body>
+</html>

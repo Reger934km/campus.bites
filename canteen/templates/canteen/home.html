@@ -1,0 +1,164 @@
+{% load static %}
+{% load cart_extras %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Bites</title>
+  <link rel="stylesheet" href="static\canteen\style.css">
+  
+
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <img src="static\canteen\images/bb.png" alt="LOGO">
+    </div>
+    
+    <nav class="nav">
+  <a href="{% url 'home' %}">Home</a>
+  <a href="{% url 'menu' %}">Menu</a>
+  <a href="{% url 'cart' %}">Cart</a>
+  <a href="{% url 'about' %}">About Us</a>
+  <a href="{% url 'contact' %}">Contact</a>
+
+  
+ {% if user.is_authenticated %}
+    <a href="{% url 'profile' %}">
+      <img src="{% static 'canteen/images/profile.png' %}" alt="Profile" style="height: 30px; width: 30px; border-radius: 50%; margin-left: 15px;">
+    </a>
+  {% else %}
+    <a href="{% url 'login' %}" class="btn">Login</a>
+    <a href="{% url 'register' %}" class="btn">Sign up</a>
+  {% endif %}
+
+ 
+</nav>
+
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Welcome to Campus Bites</h1>
+      <p>Delicious, affordable meals tailored to your dietary needs and preferences.</p>
+      <div class="hero-buttons">
+        <a id="a" href="menu">View Menu</a>
+        <a  id="b" href="#special-offer">Today Special</a>
+        
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="static\canteen\images/hero.jpg" alt="Hero Image">
+    </div>
+  </section>
+
+  <section class="categories">
+    <h2>Menu Categories</h2>
+    <div class="category-buttons">
+      <button>Breakfast</button>
+      <button>Lunch</button>
+      <button>Snacks</button>
+      <button>Beverages</button>
+      <button>Desserts</button>
+    </div>
+  </section>
+
+  <section class="menu">
+    <h2>Breakfast Menu</h2>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <img src="static\canteen\images\sa.jpg" alt="Avocado Toast">
+        <h3>Samosa Chai</h3>
+        <p>40</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="static\canteen\images\dosa.jpg" alt="Berry Oatmeal">
+        <h3>Masala Dosa</h3>
+        <p>₹50</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="static\canteen\images\panner.jpg" alt="Blueberry Pancakes">
+        <h3>Butter Panner</h3>
+        <p>60</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="static\canteen\images\burger.jpg" alt="Veggie Omelette">
+        <h3>Burger</h3>
+        <p>50</p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="special" id="special-offer">
+    <h2>Today's Special</h2>
+    <div class="special-content" >
+      <img src=" static\canteen\images\pav.jpg" alt="Pav Bhaji">
+      <div>
+        <h3>Pav Bhaji</h3>
+        <p>A spicy blend of mashed vegetables cooked in butter and served with soft, toasted pav buns. Garnished with onions, lemon, and a dollop of butter.</p>
+        <p class="price">80</p>
+        <button>Order Now</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="preferences">
+    <h2>Dietary Preferences</h2>
+    <div class="prefs">
+      <button>Vegetarian</button>
+      <button>Vegan</button>
+      <button>Gluten-Free</button>
+      <button>Dairy-Free</button>
+      <button>Spicy</button>
+      <button>Heart Healthy</button>
+    </div>
+  </section>
+
+  <section class="footer-info">
+    <div class="opening-hours">
+      <h3>Opening Hours</h3>
+      <p>Monday - Friday: 7:00 AM - 10:00 PM</p>
+      <p>Saturday - Sunday: 8:00 AM - 8:00 PM</p>
+    </div>
+    <div class="bulk-order">
+      <h3>Need to place a bulk order?</h3>
+      <p>Planning an event or meeting? Contact us for catering and group bookings.</p>
+      <button>Contact for Catering</button>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-columns">
+      <div class="column">
+        <h4>Campus Bites</h4>
+        <p>Quality meals on campus.</p>
+      </div>
+      <div class="column">
+        <h4>Quick Links</h4>
+        <a href="home">Home</a>
+        <a href="menu">Menu</a>
+        <a href="#special-offer">Specials</a>
+      </div>
+      <div class="column">
+        <h4>Policy</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+      </div>
+      <div class="column">
+        <h4>Contact Us</h4>
+        <p>Campus Bites Reger, University Campus</p>
+        <p>Email: campusbites@gmail.com</p>
+        <p>Phone: 7821076305</p>
+      </div>
+    </div>
+    <p class="copyright">&copy; 2025 Campus Bites. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

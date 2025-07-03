@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: canteen-website
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn canteen_website.wsgi"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: canteen_website.settings
+      - key: SECRET_KEY
+        value: your-secret-key-here
+      - key: ALLOWED_HOSTS
+        value: your-site-name.onrender.com
