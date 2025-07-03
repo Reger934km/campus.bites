@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -122,6 +123,16 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+import os
+
+STATIC_URL = '/static/'
+
+# ADD THIS:
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Optional: Helps serve static files on Render
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Optional if you're using a custom static folder during development:
 import os
@@ -137,6 +148,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 from django.conf import settings
 from django.conf.urls.static import static
 
+import os
 
 import os
 
