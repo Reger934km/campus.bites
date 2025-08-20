@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +21,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-d#k3%)^_@q%kp4#m%fy1b$343++@m76p6aqaq6s_9j63_xgn&v'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-d#k3%)^_@q%kp4#m%fy1b$343++@m76p6aqaq6s_9j63_xgn&v')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = []
+_allowed_hosts_env = os.environ.get('ALLOWED_HOSTS', '')
+ALLOWED_HOSTS = [h.strip() for h in _allowed_hosts_env.split(',') if h.strip()]
+if not ALLOWED_HOSTS and DEBUG:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+# Helps with CSRF when behind a proxy (e.g., Render) and for local dev
+CSRF_TRUSTED_ORIGINS = [
+    *(f"https://{h}" for h in ALLOWED_HOSTS if h),
+    *(f"http://{h}" for h in ALLOWED_HOSTS if h),
+]
 
 
 
@@ -55,7 +65,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'canteen_website.urls'
-import os
 
 TEMPLATES = [
     {
@@ -118,26 +127,22 @@ USE_I18N = True
 USE_TZ = True
 
 
+###############################################
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-
-STATIC_URL = '/static/'
-import os
+###############################################
 
 STATIC_URL = '/static/'
 
-# ADD THIS:
+# Where collectstatic will put compiled assets (for production)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Optional: Helps serve static files on Render
+# Serve compressed static files via WhiteNoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
-# Optional if you're using a custom static folder during development:
-import os
+# Additional static file directories for development
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR ,'canteen','static'),
+    os.path.join(BASE_DIR, 'canteen', 'static'),
 ]
 
 
@@ -145,12 +150,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-from django.conf import settings
-from django.conf.urls.static import static
-
-import os
-
-import os
+ 
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

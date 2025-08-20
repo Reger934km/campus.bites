@@ -1,1 +1,16 @@
-"__pycache__/\n*.pyc\n*.sqlite3\nvenv/\n.env\nmedia/" 
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+ENV/
+env/
+db.sqlite3
+*.sqlite3
+staticfiles/
+media/tmp/
+.env
+.env.*
+.vscode/
+.idea/
+Thumbs.db
