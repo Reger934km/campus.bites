@@ -28,18 +28,26 @@ DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 
 _allowed_hosts_env = os.environ.get('ALLOWED_HOSTS', '')
 ALLOWED_HOSTS = [h.strip() for h in _allowed_hosts_env.split(',') if h.strip()]
-if not ALLOWED_HOSTS and DEBUG:
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
-# Automatically include Render's assigned hostname if present
+# Prefer explicit env var; otherwise choose sensible defaults
 _render_host = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if not ALLOWED_HOSTS:
+    if DEBUG:
+        ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+    elif _render_host:
+        ALLOWED_HOSTS = [_render_host]
+    else:
+        # Fallback for Render when hostname env is unavailable
+        ALLOWED_HOSTS = ['.onrender.com']
+
+# Ensure Render hostname is included if present
 if _render_host and _render_host not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append(_render_host)
 
 # Helps with CSRF when behind a proxy (e.g., Render) and for local dev
 CSRF_TRUSTED_ORIGINS = [
-    *(f"https://{h}" for h in ALLOWED_HOSTS if h),
-    *(f"http://{h}" for h in ALLOWED_HOSTS if h),
+    *(f"https://{h.lstrip('.') }" for h in ALLOWED_HOSTS if h),
+    *(f"http://{h.lstrip('.') }" for h in ALLOWED_HOSTS if h),
 ]
 
 
