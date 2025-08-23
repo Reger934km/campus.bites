@@ -19,3 +19,12 @@ services:
         value: CampusBites#Admin2025!
       - key: DEBUG
         value: "False"
+    envFromDatabase:
+      - name: postgres
+        key: DATABASE_URL
+
+  - type: pserv
+    name: postgres
+    env: postgres
+    plan: free
+    ipAllowList: []
