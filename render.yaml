@@ -3,7 +3,7 @@ services:
     name: canteen-website
     env: python
     buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput"
-    startCommand: "python manage.py migrate --noinput && python manage.py create_admin && gunicorn canteen_website.wsgi"
+    startCommand: "python manage.py migrate --noinput && gunicorn canteen_website.wsgi"
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: canteen_website.settings
