@@ -3,11 +3,19 @@ services:
     name: canteen-website
     env: python
     buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput"
-    startCommand: "python manage.py migrate --noinput && gunicorn canteen_website.wsgi"
+    startCommand: "python manage.py migrate --noinput && python manage.py createsuperuser --noinput || true && gunicorn canteen_website.wsgi"
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: canteen_website.settings
       - key: SECRET_KEY
-        value: your-secret-key-here
+        value: CampusBitesSecretKey2025!@#$%^&*()
       - key: ALLOWED_HOSTS
-        value: your-site-name.onrender.com
+        value: campus-bites-9th3.onrender.com
+      - key: DJANGO_SUPERUSER_USERNAME
+        value: admin
+      - key: DJANGO_SUPERUSER_EMAIL
+        value: admin@campusbites.app
+      - key: DJANGO_SUPERUSER_PASSWORD
+        value: CampusBites#Admin2025!
+      - key: DEBUG
+        value: "False"
