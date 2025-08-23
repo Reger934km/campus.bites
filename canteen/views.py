@@ -1,8 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.core.files.storage import default_storage
+from django.conf import settings
+import os
 from .models import MenuItem, CartItem
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from .templatetags.cart_extras import get_item
 
 
 def home(request):
@@ -78,8 +85,43 @@ def checkout_view(request):
 
 @login_required
 def place_order(request):
-    CartItem.objects.filter(user=request.user).delete()
-    return render(request, 'canteen/order_confirmation.html')
+    # Get cart items for the current user
+    cart_items = CartItem.objects.filter(user=request.user)
+    
+    if not cart_items.exists():
+        messages.warning(request, 'Your cart is empty!')
+        return redirect('cart')
+    
+    # Calculate total price
+    total_price = sum(item.total_price() for item in cart_items)
+    
+    # Clear cart after order placement
+    cart_items.delete()
+    
+    messages.success(request, f'Order placed successfully! Total: ₹{total_price}')
+    return redirect('menu')
+
+def serve_media(request, path):
+    """Custom view to serve media files in production"""
+    file_path = os.path.join(settings.MEDIA_ROOT, path)
+    
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as f:
+            response = HttpResponse(f.read())
+            
+        # Set appropriate content type based on file extension
+        if path.endswith('.jpg') or path.endswith('.jpeg'):
+            response['Content-Type'] = 'image/jpeg'
+        elif path.endswith('.png'):
+            response['Content-Type'] = 'image/png'
+        elif path.endswith('.gif'):
+            response['Content-Type'] = 'image/gif'
+        else:
+            response['Content-Type'] = 'application/octet-stream'
+            
+        return response
+    else:
+        return HttpResponse('File not found', status=404)
 
 # views.py
 from django.shortcuts import render

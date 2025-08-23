@@ -171,12 +171,13 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'canteen', 'static'),
 ]
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
- 
+
+###############################################
+# Media files (User uploaded content)
+###############################################
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -184,6 +185,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Ensure media files are properly handled
 FILE_UPLOAD_PERMISSIONS = 0o644
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5MB
+
+# For production, ensure media files are accessible
+if not DEBUG:
+    # Ensure media directory exists
+    os.makedirs(MEDIA_ROOT, exist_ok=True)
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'

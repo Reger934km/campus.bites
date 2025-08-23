@@ -14,11 +14,13 @@ urlpatterns = [
     path('place_order/', views.place_order, name='place_order'),
     path('profile/', views.profile, name='profile'),
     
+    # Media files serving (for production)
+    path('media/<path:path>', views.serve_media, name='serve_media'),
+    
     # Login and Logout
     path('accounts/login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('accounts/logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
     path('accounts/signup/', views.signup, name='signup'),
-
 ]
 
 
