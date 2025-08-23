@@ -29,7 +29,14 @@
         <div class="cart-grid">
           {% for item in cart_items %}
             <div class="cart-card">
-              <img src="{{ item.item.image.url }}" alt="{{ item.item.name }}" />
+              {% if item.item.image %}
+                <img src="{{ item.item.image.url }}" alt="{{ item.item.name }}" />
+              {% else %}
+                <div class="no-image-placeholder">
+                  <span>🍽️</span>
+                  <p>No Image</p>
+                </div>
+              {% endif %}
               <div class="cart-info">
                 <h3>{{ item.item.name }}</h3>
                 <p>Price: ₹{{ item.item.price }}</p>
